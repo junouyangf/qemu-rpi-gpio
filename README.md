@@ -63,7 +63,6 @@ In a shell on your raspberry pi do:
 ```
 $ sudo su -
 # echo 4 >/sys/class/gpio/export
-# echo in >/sys/class/gpio/direction
 ```
 
 The main commands in the `qemu-rpi-gpio` application are:
@@ -83,7 +82,7 @@ For instance, let us set the value of the pre-exported gpio 4
 Now you can read the value of your gpio 
 
 ```
-# cat /sys/class/gpio/value
+# cat /sys/class/gpio/gpio4/value
 1
 ```
 
