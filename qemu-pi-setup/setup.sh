@@ -1,5 +1,6 @@
 #!/bin/sh
-TARGET=https://downloads.raspberrypi.org/raspios_lite_armhf_latest
+# DESCARGAR ANTES DE LA PÁGINA EL .ZIP -> MOVERLA A LA CARPETA PERSONAL -> EXTRAER
+TARGET=https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite
 DISK="sd.img"
 BOOTFS=rootfs
 SIZE=256
@@ -14,11 +15,7 @@ setup_dependencies() {
 
 download_pi_os() {
 	TARGET="$1"
-	wget -O "$(basename $TARGET).zip" -c "$TARGET" >&2
-	IMGNAME="$(7z l $(basename $TARGET).zip | awk '/  raspios/{print $NF}')"
-	if [ ! -f "$IMGNAME" ]; then
-		7z x  "$(basename $TARGET).zip" > /dev/null
-	fi
+	IMGNAME="$(7z l $(basename $TARGET).zip | awk '/img/{print $NF}')"
 	echo "$IMGNAME"
 }
 
