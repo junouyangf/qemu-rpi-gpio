@@ -17,7 +17,7 @@ cd "$HOME"
 # Target root with kernel and dtbs
 ROOTFS=rootfs
 # Target downloaded zip
-TARGET=raspios_lite_armhf_latest.zip
+TARGET=2020-02-13-raspbian-buster-lite.zip
 # Port to forward ssh to
 SSHPORT=50022
 # Enable or disable GPIO management
@@ -61,12 +61,9 @@ if $LOGPARAMS; then
 fi
 
 SERIAL=""
-SERIAL="$SERIAL -curses"
 SERIAL="$SERIAL -serial stdio"
-SERIAL="$SERIAL -monitor unix:/tmp/monitor.sock"
 
 "$QEMU"                                                   \
-	-curses                                           \
 	$SERIAL                                           \
 	-M       raspi3b                                  \
 	-dtb     "$ROOTFS/bcm2710-rpi-3-b-plus.dtb"       \
