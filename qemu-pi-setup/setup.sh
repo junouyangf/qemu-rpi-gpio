@@ -1,12 +1,11 @@
 #!/bin/sh
-# DESCARGAR ANTES DE LA PÁGINA EL .ZIP -> MOVERLA A LA CARPETA PERSONAL -> EXTRAER
 TARGET=https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-14/2020-02-13-raspbian-buster-lite
 DISK="sd.img"
 BOOTFS=rootfs
 SIZE=256
 SIZEUNIT=M
 TMPMOUNT=tmpmnt
-
+ROUTE= /home/jose/2020-02-13-raspbian-buster-lite.zip
 setup_dependencies() {
 	sudo apt update
 	sudo apt install -y qemu-system-arm
@@ -15,8 +14,11 @@ setup_dependencies() {
 
 download_pi_os() {
 	TARGET="$1"
-	IMGNAME="$(7z l $(basename $TARGET).zip | awk '/img/{print $NF}')"
+	wget "$TARGET.zip"
+	unzip /home/jose/2020-02-13-raspbian-buster-lite.zip #Add variable for the directory
+	
 	echo "$IMGNAME"
+	
 }
 
 get_files() {
@@ -48,7 +50,7 @@ get_files() {
 resize_img() {
 	IMGNAME="$1"
 	SIZE="$2"
-	qemu-img resize -f raw "$IMGNAME" "$SIZE"
+	qemu-img resize -f raw /home/jose/2020-02-13-raspbian-buster-lite.img "$SIZE" #Add variable for the directory
 }
 
 cd "$HOME"
