@@ -15,7 +15,11 @@ setup_dependencies() {
 download_pi_os() {
 	TARGET="$1"
 	wget "$TARGET.zip"
-	unzip /home/jose/2020-02-13-raspbian-buster-lite.zip #Add variable for the directory
+	#IMGNAME="$(7z l $(basename $TARGET).zip | awk '/  raspios/{print $NF}')"
+	#if [ ! -f "$IMGNAME" ]; then
+		unzip /home/jose/2020-02-13-raspbian-buster-lite.zip #Add variable for the directory
+	#fi
+	#Entender IMGNAME!!!
 	
 	echo "$IMGNAME"
 	
